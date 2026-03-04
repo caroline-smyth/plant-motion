@@ -21,19 +21,11 @@ export default function Shade() {
             )}
             
             {showShader}
-            <p className="text-neutral-500">
-                
-            <button 
-                onClick={() => setShowShader(!showShader)}
-                className="self-start underline"
-            >
-                Original image
-            </button> from Riverside Park on October 11, 2024
-            </p>
-            <div className="flex items-center">
+            
+            <div className="flex items-center justify-center">
                 <input
                     type="range"
-                    min={2}
+                    min={1}
                     max={50}
                     step={1}
                     value={dotSize}
@@ -44,7 +36,7 @@ export default function Shade() {
                         setInputValue(Math.round(val).toString());
                         setShowShader(true);
                     }}
-                    className="w-60"
+                    className="w-60 mt-5"
                 />
             </div>
             
