@@ -9,7 +9,7 @@ const ebGaramond = EB_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Tinkering",
+  title: "Sketchbook",
   description: "Thinking about motion, elegance, interactivity",
 };
 
