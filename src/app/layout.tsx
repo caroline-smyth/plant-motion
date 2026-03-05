@@ -23,7 +23,7 @@ export default function RootLayout({
       <body
         className={`${ebGaramond.className} antialiased flex flex-col items-center min-h-screen pt-[20dvh]`}
       >
-        <div className="w-full max-w-2xl px-6 pb-[30dvh]">
+        <div className="w-full max-w-xl px-6 pb-[30dvh]">
           {children}
         </div>
       </body>

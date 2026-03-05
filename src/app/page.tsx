@@ -5,15 +5,25 @@ import { useEffect, useRef } from "react";
 export default function Home() {
   return (
     <div>
-      <p className="text-2xl">Tinkering</p>
+      <p className="text-2xl">Sketchbook</p>
       <p>
-        I want to explore the aesthetics that excite me and develop a style/thesis about what makes good design
-      <br></br>Somewhat based in art historical looking
-      <br></br>Somewhat based in design technologies and randomness
-      <br></br>All based in <Link href="/manifesto">what I see around me</Link> and what I like</p>
+        I feel very drawn to beautiful things in nature and on the internet
+        <br></br>
+        I want to figure out if there's a throughline in what excites me and better understand how to create
+        new stuff along that axis
+        <br></br>This will be an exercise in
+        </p>
+        <ul className="indent-4">
+          <li>Looking</li>
+          <li>Unfamiliar design technologies</li>
+          <li>Interactivity, motion, and elegance</li>
+        </ul>
+      <p>
+      All based in <Link href="/manifesto">what I see around me</Link> and what I like</p>
       <br></br>
-      <Link href="projects/shade" className="underline">Halftone waves</Link>
+      <Link href="projects/waves" className="underline">Halftone waves</Link>
       <br></br>
+      <Link href="projects/crown" className="underline">Trees</Link>
     </div>
   );
 }
