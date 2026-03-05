@@ -9,13 +9,11 @@ const COLS = 5;
 export default function BuildingScene() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [windows, setWindows] = useState<boolean[]>(() =>
-    // Start with some windows randomly lit
     Array(ROWS * COLS).fill(false).map(() => Math.random() > 0.3)
   );
   const windowsRef = useRef(windows);
   const timeRef = useRef(0);
 
-  // Keep ref in sync with state
   useEffect(() => {
     windowsRef.current = windows;
   }, [windows]);
