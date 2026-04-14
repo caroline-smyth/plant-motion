@@ -1,37 +1,36 @@
+import Header from "../../components/Header";
 
-export default function Manifesto() {
+export default function List() {
     return (
         <div>
+            <Header/>
             <p className="text-2xl">
-                Beautiful things I've seen recently
+                Beautiful things I've seen recently (and why I liked them)
             </p>
             <ul>
                 <li>
-                    The way light falls at an angle on Riverside Church
+                    The way light falls at an angle on Riverside Church (something ephemeral happening to something that feels permanent but which is also in a way temporary)
                 </li>
                 <li>
-                    Shower/bathroom storage
+                    Shower/bathroom storage when you have four roommates (personalities + backgrounds very evident)
                 </li>
                 <li>
-                    Thin glassware
+                    Thin drinking glasses
                 </li>
                 <li>
-                    The hour that is very blue, maybe on a cloudy day, when yellow lights have a rich, buttery color
+                    The very blue hour, maybe at the end of a cloudy day, that gives yellow lights a rich, buttery color
                 </li>
                 <li>
-                    A messy notebook
+                    A messy handwritten notebook (thanks Dr. Gamer for inspiring my return to handwritten in-class notes)
                 </li>
                 <li>
-                    Plants moving on a windowsill
+                    Plants swaying on a windowsill
                 </li>
                 <li>
-                    Items on a bookshelf leaning on each other
+                    Randomness generally 
                 </li>
                 <li>
-                    Randomness generally
-                </li>
-                <li>
-                    Chalk hopscotch 
+                    Chalk hopscotch on the street (interactivity + public fun + ephemerality again)
                 </li>
                 <li>
                     Math whiteboards that push up and down
