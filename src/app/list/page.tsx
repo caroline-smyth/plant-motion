@@ -4,33 +4,30 @@ export default function List() {
     return (
         <div>
             <Header/>
-            <p className="text-2xl">
-                Beautiful things I've seen recently (and why I liked them)
+            <p className="text-4xl mb-4 font-garamond">
+                Beautiful things I've seen recently
             </p>
-            <ul>
+            <ul className="list-disc pl-5 leading-relaxed">
                 <li>
-                    The way light falls at an angle on Riverside Church (something ephemeral happening to something that feels permanent but which is also in a way temporary)
+                    Afternoon light falling at an angle on Riverside Church
                 </li>
                 <li>
-                    Shower/bathroom storage when you have four roommates (personalities + backgrounds very evident)
+                    Shower/bathroom storage
                 </li>
                 <li>
                     Thin drinking glasses
                 </li>
                 <li>
-                    The very blue hour, maybe at the end of a cloudy day, that gives yellow lights a rich, buttery color
+                    The very blue hour that gives yellow lights a rich buttery color
                 </li>
                 <li>
-                    A messy handwritten notebook (thanks Dr. Gamer for inspiring my return to handwritten in-class notes)
-                </li>
-                <li>
-                    Plants swaying on a windowsill
+                    A handwritten notebook 
                 </li>
                 <li>
                     Randomness generally 
                 </li>
                 <li>
-                    Chalk hopscotch on the street (interactivity + public fun + ephemerality again)
+                    Chalk hopscotch on the street
                 </li>
                 <li>
                     Math whiteboards that push up and down

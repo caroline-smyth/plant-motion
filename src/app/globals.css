@@ -1,8 +1,14 @@
 @import "tailwindcss";
 
 @theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-eb-garamond), Georgia, serif;
   --font-garamond: var(--font-eb-garamond), Georgia, serif;
+}
+
+.font-garamond,
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-eb-garamond), Georgia, serif;
 }
 
 input[type="range"] {

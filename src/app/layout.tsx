@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { EB_Garamond } from "next/font/google";
+import { EB_Garamond, Inter } from "next/font/google";
 
 const ebGaramond = EB_Garamond({
   subsets: ["latin"],
-  variable: "--font-eb-garamond",  
+  variable: "--font-eb-garamond",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -21,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${ebGaramond.className} antialiased flex flex-col items-center min-h-screen pt-[20dvh]`}
+        className={`${ebGaramond.variable} ${inter.variable} font-sans antialiased flex flex-col items-center min-h-screen pt-[20dvh]`}
       >
         <div className="w-full max-w-xl px-6 pb-[30dvh]">
           {children}
