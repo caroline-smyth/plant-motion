@@ -10,6 +10,7 @@ export default function Home() {
       </p>
       <a href="projects/books" className="underline">Book cover archive</a>
       */}
+      <a href="projects/card" className="underline">Card animation</a>
     </div>
 
   );
