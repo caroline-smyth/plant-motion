@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 
 function levenshtein(a: string, b: string): number {
@@ -28,19 +28,37 @@ type CardProps = {
   year: number;
   medium?: string;
   notes?: string;
+  onComplete?: () => void;
 };
 
-export default function Card({ image, painter, title, year, medium, notes }: CardProps) {
+export default function Card({ image, painter, title, year, medium, notes, onComplete }: CardProps) {
   const [flipped, setFlipped] = useState(false);
   const [answer, setAnswer] = useState("");
   const [mediumAnswer, setMediumAnswer] = useState("");
+  const answerRef = useRef<HTMLInputElement>(null);
   const mediumRef = useRef<HTMLInputElement>(null);
 
-  const parts = answer.split(",").map(p => p.trim());
+  const yearMatch = answer.match(/\b(\d{4})\b/);
+  const yearStr = yearMatch?.[0] ?? "";
+  const withoutYear = answer.replace(/\b\d{4}\b/, "").trim();
+  const delimIdx = withoutYear.search(/[, ]/);
+  const painterStr = (delimIdx >= 0 ? withoutYear.slice(0, delimIdx) : withoutYear).trim();
+  const titleStr = delimIdx >= 0
+    ? withoutYear.slice(delimIdx).replace(/^[,\s]+/, "").replace(/[,\s]+$/, "").trim()
+    : "";
+  const parts = [painterStr, titleStr, yearStr];
   const painterCorrect = parts[0]?.length > 0 && isMatch(parts[0], painter);
   const titleCorrect = parts[1]?.length > 0 && isMatch(parts[1], title);
   const yearCorrect = parts[2]?.length > 0 && parts[2].trim() === String(year);
   const allCorrect = painterCorrect && titleCorrect && yearCorrect;
+  const mediumCorrect = !medium || (mediumAnswer.length > 0 && isMatch(mediumAnswer, medium));
+  const allComplete = allCorrect && mediumCorrect;
+
+  useEffect(() => {
+    if (!allComplete || !onComplete) return;
+    const t = setTimeout(onComplete, 400);
+    return () => clearTimeout(t);
+  }, [allComplete]);
 
   return (
     <div className="flex flex-col items-center gap-6">
@@ -64,7 +82,7 @@ export default function Card({ image, painter, title, year, medium, notes }: Car
               <img src={image} alt="" className="w-full h-full object-cover" />
             )}
           </div>
-          <p className="font-garamond text-sm text-cyan-900"></p>
+          <div className="h-2"></div>
         </motion.div>
 
         {/* Back */}
@@ -85,19 +103,27 @@ export default function Card({ image, painter, title, year, medium, notes }: Car
       {/* Inputs */}
       <div className="flex flex-col gap-3 w-96">
         <input
+          ref={answerRef}
           value={answer}
           onChange={e => setAnswer(e.target.value)}
           onKeyDown={e => e.key === "Enter" && allCorrect && medium && mediumRef.current?.focus()}
           placeholder="Name, Title, Year"
-          className={`outline-none bg-transparent text-sm placeholder:text-neutral-300 transition-colors duration-300 ${allCorrect ? "text-green-600" : "text-neutral-500"}`}
+          className={`outline-none bg-transparent text-sm placeholder:text-neutral-400 transition-colors duration-300 ${allCorrect ? "text-green-600" : "text-neutral-500"}`}
         />
         {medium && (
           <input
             ref={mediumRef}
             value={mediumAnswer}
             onChange={e => setMediumAnswer(e.target.value)}
+            onKeyDown={e => {
+              if (e.key === "Backspace" && mediumAnswer === "") {
+                e.preventDefault();
+                const el = answerRef.current;
+                if (el) { el.focus(); el.setSelectionRange(el.value.length, el.value.length); }
+              }
+            }}
             placeholder="Medium"
-            className={`outline-none bg-transparent text-sm placeholder:text-neutral-300 transition-colors duration-300 ${mediumAnswer.length > 0 && isMatch(mediumAnswer, medium) ? "text-green-600" : "text-neutral-500"}`}
+            className={`outline-none bg-transparent text-sm placeholder:text-neutral-400 transition-colors duration-300 ${mediumAnswer.length > 0 && isMatch(mediumAnswer, medium) ? "text-green-600" : "text-neutral-500"}`}
           />
         )}
       </div>
