@@ -53,6 +53,10 @@ export default function CardDeck({ cards }: { cards: CardData[] }) {
           </button>
         )}
       </div>
+      <div className="hidden">
+        {cards[currentIndex - 1]?.image && <img src={cards[currentIndex - 1].image} alt="" />}
+        {cards[currentIndex + 1]?.image && <img src={cards[currentIndex + 1].image} alt="" />}
+      </div>
     </div>
   );
 }
