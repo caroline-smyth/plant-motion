@@ -38,7 +38,7 @@ export default function CardDeck({ cards }: { cards: CardData[] }) {
         {currentIndex > 0 && (
           <button
             onClick={goPrev}
-            className="absolute top-36 -translate-y-1/2 -left-10 text-neutral-400 hover:text-neutral-600 transition-colors"
+            className="absolute top-28 sm:top-36 -translate-y-1/2 -left-6 sm:-left-10 text-neutral-400 hover:text-neutral-600 transition-colors"
           >
             <ChevronLeft size={20} />
           </button>
@@ -47,7 +47,7 @@ export default function CardDeck({ cards }: { cards: CardData[] }) {
         {currentIndex < cards.length - 1 && (
           <button
             onClick={goNext}
-            className="absolute top-36 -translate-y-1/2 -right-10 text-neutral-400 hover:text-neutral-600 transition-colors"
+            className="absolute top-28 sm:top-36 -translate-y-1/2 -right-6 sm:-right-10 text-neutral-400 hover:text-neutral-600 transition-colors"
           >
             <ChevronRight size={20} />
           </button>

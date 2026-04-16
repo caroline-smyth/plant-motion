@@ -81,16 +81,16 @@ export default function Card({ image, painter, title, year, medium, notes, onCom
 
         {/* Back */}
         <motion.div
-          className="absolute inset-0 bg-cyan-900 rounded-2xl p-8 flex flex-col justify-center gap-2"
+          className="absolute inset-0 bg-cyan-900 rounded-2xl p-5 sm:p-8 flex flex-col justify-center gap-2"
           initial={{ rotateX: -180 }}
           animate={{ rotateX: flipped ? 0 : -180 }}
           transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
           style={{ backfaceVisibility: "hidden" }}
           whileTap={{ y: -2 }}
         >
-          <p className="font-garamond text-2xl text-cyan-100">{painter}, <em>{title}</em>, {year}</p>
-          {medium && <p className="text-sm text-cyan-100 mt-1">{medium}</p>}
-          {notes && <p className="text-sm text-cyan-300 leading-relaxed mt-2">{notes}</p>}
+          <p className="font-garamond text-lg sm:text-2xl text-cyan-100">{painter}, <em>{title}</em>, {year}</p>
+          {medium && <p className="text-xs sm:text-sm text-cyan-100 mt-1">{medium}</p>}
+          {notes && <p className="text-xs sm:text-sm text-cyan-300 leading-relaxed mt-2">{notes}</p>}
         </motion.div>
       </div>
 
