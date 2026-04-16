@@ -70,14 +70,14 @@ export default function Card({ image, painter, title, year, medium, notes, onCom
       >
         {/* Front */}
         <motion.div
-          className="absolute w-96 h-72 bg-cyan-400 rounded-2xl p-6 flex flex-col gap-3"
+          className="absolute w-96 h-72 rounded-2xl p-6 flex flex-col gap-3"
           initial={{ rotateX: 0 }}
           animate={{ rotateX: flipped ? 180 : 0 }}
           transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
-          style={{ backfaceVisibility: "hidden" }}
+          style={{ backfaceVisibility: "hidden", backgroundColor: "var(--card-front)" }}
           whileTap={{ y: -2 }}
         >
-          <div className="w-full flex-1 rounded-md overflow-hidden bg-cyan-300">
+          <div className="w-full flex-1 rounded-md overflow-hidden" style={{ backgroundColor: "var(--card-front-image)" }}>
             {image && (
               <img src={image} alt="" className="w-full h-full object-cover" />
             )}
@@ -87,16 +87,16 @@ export default function Card({ image, painter, title, year, medium, notes, onCom
 
         {/* Back */}
         <motion.div
-          className="absolute w-96 h-72 bg-cyan-900 rounded-2xl p-8 flex flex-col justify-center gap-2"
+          className="absolute w-96 h-72 rounded-2xl p-8 flex flex-col justify-center gap-2"
           initial={{ rotateX: -180 }}
           animate={{ rotateX: flipped ? 0 : -180 }}
           transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
-          style={{ backfaceVisibility: "hidden" }}
+          style={{ backfaceVisibility: "hidden", backgroundColor: "var(--card-back)" }}
           whileTap={{ y: -2 }}
         >
-          <p className="font-garamond text-2xl text-cyan-100">{painter}, <em>{title}</em>, {year}</p>
-          {medium && <p className="text-sm text-cyan-100 mt-1">{medium}</p>}
-          {notes && <p className="text-sm text-cyan-300 leading-relaxed mt-2">{notes}</p>}
+          <p className="font-garamond text-2xl" style={{ color: "var(--card-back-text)" }}>{painter}, <em>{title}</em>, {year}</p>
+          {medium && <p className="text-sm mt-1" style={{ color: "var(--card-back-text)" }}>{medium}</p>}
+          {notes && <p className="text-sm leading-relaxed mt-2" style={{ color: "var(--card-back-notes)" }}>{notes}</p>}
         </motion.div>
       </div>
 

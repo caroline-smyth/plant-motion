@@ -60,3 +60,40 @@ input[type="range"]::-moz-range-thumb {
   border: none;
   border-radius: 0;
 }
+
+/* ── card color themes ──────────────────────────────────────────────────────
+   Edit hex values here. Add a matching entry in ThemePicker.tsx to expose
+   a new theme in the UI.
+   ─────────────────────────────────────────────────────────────────────── */
+:root,
+[data-theme="cyan"] {
+  --card-front: #22d3ee;
+  --card-front-image: #67e8f9;
+  --card-back: #164e63;
+  --card-back-text: #cffafe;
+  --card-back-notes: #67e8f9;
+}
+
+[data-theme="rose"] {
+  --card-front: #fb7185;
+  --card-front-image: #fda4af;
+  --card-back: #881337;
+  --card-back-text: #ffe4e6;
+  --card-back-notes: #fda4af;
+}
+
+[data-theme="amber"] {
+  --card-front: #fbbf24;
+  --card-front-image: #fcd34d;
+  --card-back: #78350f;
+  --card-back-text: #fef3c7;
+  --card-back-notes: #fcd34d;
+}
+
+[data-theme="violet"] {
+  --card-front: #a78bfa;
+  --card-front-image: #c4b5fd;
+  --card-back: #4c1d95;
+  --card-back-text: #ede9fe;
+  --card-back-notes: #c4b5fd;
+}

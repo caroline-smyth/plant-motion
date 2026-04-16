@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${ebGaramond.variable} ${inter.variable} font-sans antialiased flex flex-col items-center min-h-screen pt-[20dvh]`}
       >
