@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 
 function levenshtein(a: string, b: string): number {
@@ -49,28 +49,22 @@ export default function Card({ image, painter, title, year, medium, notes, onCom
   const parts = [painterStr, titleStr, yearStr];
   const painterCorrect = parts[0]?.length > 0 && isMatch(parts[0], painter);
   const titleCorrect = parts[1]?.length > 0 && isMatch(parts[1], title);
-  const yearCorrect = parts[2]?.length > 0 && parts[2].trim() === year;
+  const yearCorrect = parts[2]?.length > 0 && parts[2].trim() === String(year);
   const allCorrect = painterCorrect && titleCorrect && yearCorrect;
   const mediumCorrect = !medium || (mediumAnswer.length > 0 && isMatch(mediumAnswer, medium));
   const allComplete = allCorrect && mediumCorrect;
-
-  useEffect(() => {
-    if (!allComplete || !onComplete) return;
-    const t = setTimeout(onComplete, 400);
-    return () => clearTimeout(t);
-  }, [allComplete]);
 
   return (
     <div className="flex flex-col items-center gap-6">
       {/* Card */}
       <div
         style={{ perspective: 1000 }}
-        className="relative w-96 h-72 cursor-pointer"
+        className="relative w-72 sm:w-96 aspect-[4/3] cursor-pointer"
         onClick={() => setFlipped(!flipped)}
       >
         {/* Front */}
         <motion.div
-          className="absolute w-96 h-72 bg-cyan-400 rounded-2xl p-6 flex flex-col gap-3"
+          className="absolute inset-0 bg-cyan-400 rounded-2xl p-6 flex flex-col gap-3"
           initial={{ rotateX: 0 }}
           animate={{ rotateX: flipped ? 180 : 0 }}
           transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
@@ -87,7 +81,7 @@ export default function Card({ image, painter, title, year, medium, notes, onCom
 
         {/* Back */}
         <motion.div
-          className="absolute w-96 h-72 bg-cyan-900 rounded-2xl p-8 flex flex-col justify-center gap-2"
+          className="absolute inset-0 bg-cyan-900 rounded-2xl p-8 flex flex-col justify-center gap-2"
           initial={{ rotateX: -180 }}
           animate={{ rotateX: flipped ? 0 : -180 }}
           transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
@@ -101,12 +95,16 @@ export default function Card({ image, painter, title, year, medium, notes, onCom
       </div>
 
       {/* Inputs */}
-      <div className="flex flex-col gap-3 w-96">
+      <div className="flex flex-col gap-3 w-72 sm:w-96">
         <input
           ref={answerRef}
           value={answer}
           onChange={e => setAnswer(e.target.value)}
-          onKeyDown={e => e.key === "Enter" && allCorrect && medium && mediumRef.current?.focus()}
+          onKeyDown={e => {
+            if (e.key !== "Enter") return;
+            if (allCorrect && medium) mediumRef.current?.focus();
+            else if (allComplete) onComplete?.();
+          }}
           placeholder="Name, Title, Year"
           className={`outline-none bg-transparent text-sm placeholder:text-neutral-400 transition-colors duration-300 ${allCorrect ? "text-green-600" : "text-neutral-500"}`}
         />
@@ -116,6 +114,7 @@ export default function Card({ image, painter, title, year, medium, notes, onCom
             value={mediumAnswer}
             onChange={e => setMediumAnswer(e.target.value)}
             onKeyDown={e => {
+              if (e.key === "Enter" && allComplete) { onComplete?.(); return; }
               if (e.key === "Backspace" && mediumAnswer === "") {
                 e.preventDefault();
                 const el = answerRef.current;

@@ -21,7 +21,7 @@ export default function CardDeck({ cards }: { cards: CardData[] }) {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (document.activeElement?.tagName === "INPUT") return;
+      if ((e.target as HTMLElement).tagName === "INPUT") return;
       if (e.key === "Enter" || e.key === "ArrowRight") goNext();
       if (e.key === "ArrowLeft") goPrev();
     };
