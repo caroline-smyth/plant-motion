@@ -8,7 +8,7 @@ type CardData = {
   image?: string;
   painter: string;
   title: string;
-  year: number;
+  year: string;
   medium?: string;
   notes?: string;
 };

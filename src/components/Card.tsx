@@ -25,7 +25,7 @@ type CardProps = {
   image?: string;
   painter: string;
   title: string;
-  year: number;
+  year: string;
   medium?: string;
   notes?: string;
   onComplete?: () => void;
@@ -38,9 +38,9 @@ export default function Card({ image, painter, title, year, medium, notes, onCom
   const answerRef = useRef<HTMLInputElement>(null);
   const mediumRef = useRef<HTMLInputElement>(null);
 
-  const yearMatch = answer.match(/\b(\d{4})\b/);
+  const yearMatch = answer.match(/\b\d{4}(?:-\d{4})?\b/);
   const yearStr = yearMatch?.[0] ?? "";
-  const withoutYear = answer.replace(/\b\d{4}\b/, "").trim();
+  const withoutYear = answer.replace(/\b\d{4}(?:-\d{4})?\b/, "").trim();
   const delimIdx = withoutYear.search(/[, ]/);
   const painterStr = (delimIdx >= 0 ? withoutYear.slice(0, delimIdx) : withoutYear).trim();
   const titleStr = delimIdx >= 0
@@ -49,7 +49,7 @@ export default function Card({ image, painter, title, year, medium, notes, onCom
   const parts = [painterStr, titleStr, yearStr];
   const painterCorrect = parts[0]?.length > 0 && isMatch(parts[0], painter);
   const titleCorrect = parts[1]?.length > 0 && isMatch(parts[1], title);
-  const yearCorrect = parts[2]?.length > 0 && parts[2].trim() === String(year);
+  const yearCorrect = parts[2]?.length > 0 && parts[2].trim() === year;
   const allCorrect = painterCorrect && titleCorrect && yearCorrect;
   const mediumCorrect = !medium || (mediumAnswer.length > 0 && isMatch(mediumAnswer, medium));
   const allComplete = allCorrect && mediumCorrect;
@@ -70,14 +70,14 @@ export default function Card({ image, painter, title, year, medium, notes, onCom
       >
         {/* Front */}
         <motion.div
-          className="absolute w-96 h-72 rounded-2xl p-6 flex flex-col gap-3"
+          className="absolute w-96 h-72 bg-cyan-400 rounded-2xl p-6 flex flex-col gap-3"
           initial={{ rotateX: 0 }}
           animate={{ rotateX: flipped ? 180 : 0 }}
           transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
-          style={{ backfaceVisibility: "hidden", backgroundColor: "var(--card-front)" }}
+          style={{ backfaceVisibility: "hidden" }}
           whileTap={{ y: -2 }}
         >
-          <div className="w-full flex-1 rounded-md overflow-hidden" style={{ backgroundColor: "var(--card-front-image)" }}>
+          <div className="w-full flex-1 rounded-md overflow-hidden bg-cyan-300">
             {image && (
               <img src={image} alt="" className="w-full h-full object-cover" />
             )}
@@ -87,16 +87,16 @@ export default function Card({ image, painter, title, year, medium, notes, onCom
 
         {/* Back */}
         <motion.div
-          className="absolute w-96 h-72 rounded-2xl p-8 flex flex-col justify-center gap-2"
+          className="absolute w-96 h-72 bg-cyan-900 rounded-2xl p-8 flex flex-col justify-center gap-2"
           initial={{ rotateX: -180 }}
           animate={{ rotateX: flipped ? 0 : -180 }}
           transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
-          style={{ backfaceVisibility: "hidden", backgroundColor: "var(--card-back)" }}
+          style={{ backfaceVisibility: "hidden" }}
           whileTap={{ y: -2 }}
         >
-          <p className="font-garamond text-2xl" style={{ color: "var(--card-back-text)" }}>{painter}, <em>{title}</em>, {year}</p>
-          {medium && <p className="text-sm mt-1" style={{ color: "var(--card-back-text)" }}>{medium}</p>}
-          {notes && <p className="text-sm leading-relaxed mt-2" style={{ color: "var(--card-back-notes)" }}>{notes}</p>}
+          <p className="font-garamond text-2xl text-cyan-100">{painter}, <em>{title}</em>, {year}</p>
+          {medium && <p className="text-sm text-cyan-100 mt-1">{medium}</p>}
+          {notes && <p className="text-sm text-cyan-300 leading-relaxed mt-2">{notes}</p>}
         </motion.div>
       </div>
 
