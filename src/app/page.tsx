@@ -11,6 +11,8 @@ export default function Home() {
       <a href="projects/books" className="underline">Book cover archive</a>
       */}
       <a href="projects/card" className="underline">Art history flashcards</a>
+      <br />
+      <a href="projects/meandros" className="underline">Meandros</a>
     </div>
 
   );

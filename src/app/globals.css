@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@keyframes walk-sprite {
+  from { background-position-x: 0px; }
+  to   { background-position-x: -288px; } /* 3 frames × 96px */
+}
+
 @theme {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-eb-garamond), Georgia, serif;
