@@ -9,10 +9,10 @@ export default function Home() {
       {/*<p>Growing <a href="list" className="underline leading-relaxed" >list</a> of inspiration
       </p>
       <a href="projects/books" className="underline">Book cover archive</a>
-      */}
+      <a href="projects/meandros" className="underline">Meandros</a>*/}
       <a href="projects/card" className="underline">Art history flashcards</a>
       <br />
-      <a href="projects/meandros" className="underline">Meandros</a>
+      
     </div>
 
   );
